@@ -1,0 +1,80 @@
+* Free Pascal Track Demo From Scratch
+
+[[file:logo.gif][Free Pascal Logo]]
+
+** Introduction
+This repository is my first attempt to resurrect from scratch and in its your pure form such a so famous language and useful: _Pascal_. Only the original [[https://www.freepascal.org/][*Free Pascal*]] package[fn:1] is needed to run the following examples exercises on the ~/exercises/practice/~:
+
++ [[./exercises/practice/hello-world][~hello-world~]] :: failing on purpose.
++ [[./exercises/practice/two-fer][~two-fer~]] :: all tests pass.
++ [[./exercises/practice/difference-of-squares][~difference-of-squares~]] :: all tests pass.
+
+For convenience, the ~make~ is used to compile and execute the exercises. Any text editor is welcome and not even a graphical interface is needed.
+
+The test library[fn:2] is *TAP* based and easy-to-use. It is made available in a ~./lib/~ directory within each exercise, which could also contain other external libraries if needed.
+
+The *Free Pascal* package has a code formatting tool called ~ptop~. I'm using it to prettify the code, but some things look too ugly and I edited them manually. Specifically speaking, the content of the tests I generated directly from ~jq~ and the ~canonical-data.json~ file, but this part is a "copy-paste" and few things are necessary to modify in the test code to have a perfectly functional library, at least for simple exercises. The example used in this repository for ~ptop~ uses 4-spaces indentation and 80 characters line length:
+
+#+begin_src sh
+  ptop -i 4 -l 80 <infile> <outfile> # can be the same file
+#+end_src
+
+With the current approach used to building this demo, I can do all the most common "easy" exercises in few days.
+
+** Instalation
+
+Just go to download page and get latest *Free Pascal* version, 3.2.2. In my case, I just got the package from [[https://sourceforge.net/projects/freepascal/files/Linux/3.2.2/fpc-3.2.2.x86_64-linux.tar/download][this link]] and run ~install.sh~ script. Finally, I append the ~$HOME/fpc-3.2.2/bin~ to the ~PATH~ environment variable.
+
+** Testing the exercises
+
+Testing a single exercise can be done by invoking the `make` within the respective directory, example:
+
+#+begin_src sh :prologue "exec 2>&1" :results verbatim
+  cd exercises/practice/hello-world/
+  make
+#+end_src
+
+#+RESULTS:
+: 1..1
+: not ok 1
+: # Failed test
+: # expected: 'Hello, World!'
+: #      got: 'Goodbye, Mars!'
+:
+
+To test all available exercises, we can run ~./bin/verify-exercises~, example:
+
+#+begin_src sh :prologue "exec 2>&1" :results verbatim
+  ./bin/verify-exercises
+#+end_src
+
+#+RESULTS:
+#+begin_example
+exercise: two-fer
+1..3
+ok 1 - no name given
+ok 2 - a name given
+ok 3 - another name given
+
+exercise: difference-of-squares
+1..9
+ok 1 - square of sum 1
+ok 2 - square of sum 5
+ok 3 - square of sum 100
+ok 4 - sum of squares 1
+ok 5 - sum of squares 5
+ok 6 - sum of squares 100
+ok 7 - difference of squares 1
+ok 8 - difference of squares 5
+ok 9 - difference of squares 100
+
+exercise: hello-world
+1..1
+not ok 1
+
+#+end_example
+
+** Footnotes
+
+[fn:1] https://www.freepascal.org/download.html
+[fn:2] [[https://github.com/bbrtj/pascal-tap][Pascal TAP producer implementation]]
