@@ -1,17 +1,21 @@
 * Free Pascal Track Demo From Scratch
 
-[[file:logo.gif][Free Pascal Logo]]
+#+BEGIN_HTML
+<a href="https://www.freepascal.org/">
+<img src="./logo.gif" />
+</a>
+#+END_HTML
 
 ** Introduction
-This repository is my first attempt to resurrect from scratch and in its your pure form such a so famous language and useful: _Pascal_. Only the original [[https://www.freepascal.org/][*Free Pascal*]] package[fn:1] is needed to run the following examples exercises on the ~/exercises/practice/~:
+This repository is my first attempt to resurrect from scratch and in its your pure form such a so famous language and useful: _Pascal_. Only the original [[https://www.freepascal.org/][Free Pascal]] [[https://www.freepascal.org/download.html][package]] is needed to run the following examples exercises on the ~./exercises/practice/~:
 
-+ [[./exercises/practice/hello-world][~hello-world~]] :: failing on purpose.
-+ [[./exercises/practice/two-fer][~two-fer~]] :: all tests pass.
-+ [[./exercises/practice/difference-of-squares][~difference-of-squares~]] :: all tests pass.
++ [[./exercises/practice/hello-world][hello-world]] :: failing on purpose.
++ [[./exercises/practice/two-fer][two-fer]] :: all tests pass.
++ [[./exercises/practice/difference-of-squares][difference-of-squares]] :: all tests pass.
 
 For convenience, the ~make~ is used to compile and execute the exercises. Any text editor is welcome and not even a graphical interface is needed.
 
-The test library[fn:2] is *TAP* based and easy-to-use. It is made available in a ~./lib/~ directory within each exercise, which could also contain other external libraries if needed.
+The [[https://github.com/bbrtj/pascal-tap][test library]] is *TAP* based and easy-to-use. It is made available in a ~./lib/~ directory within each exercise, which could also contain other external libraries if needed.
 
 The *Free Pascal* package has a code formatting tool called ~ptop~. I'm using it to prettify the code, but some things look too ugly and I edited them manually. Specifically speaking, the content of the tests I generated directly from ~jq~ and the ~canonical-data.json~ file, but this part is a "copy-paste" and few things are necessary to modify in the test code to have a perfectly functional library, at least for simple exercises. The example used in this repository for ~ptop~ uses 4-spaces indentation and 80 characters line length:
 
@@ -29,7 +33,7 @@ Just go to download page and get latest *Free Pascal* version, 3.2.2. In my case
 
 Testing a single exercise can be done by invoking the `make` within the respective directory, example:
 
-#+begin_src sh :prologue "exec 2>&1" :results verbatim
+#+begin_src sh :prologue "exec 2>&1" :results verbatim :exports both
   cd exercises/practice/hello-world/
   make
 #+end_src
@@ -44,7 +48,7 @@ Testing a single exercise can be done by invoking the `make` within the respecti
 
 To test all available exercises, we can run ~./bin/verify-exercises~, example:
 
-#+begin_src sh :prologue "exec 2>&1" :results verbatim
+#+begin_src sh :prologue "exec 2>&1" :results verbatim :exports both
   ./bin/verify-exercises
 #+end_src
 
@@ -73,8 +77,3 @@ exercise: hello-world
 not ok 1
 
 #+end_example
-
-** Footnotes
-
-[fn:1] https://www.freepascal.org/download.html
-[fn:2] [[https://github.com/bbrtj/pascal-tap][Pascal TAP producer implementation]]
