@@ -1,41 +1,42 @@
-program VerifyExercises;
+Program VerifyExercises;
 
 {$mode objfpc}
 
-uses sysutils, process;
+Uses sysutils, process;
 
-var
-   execdir  : string;
-   rootdir  : string;
-   workdir  : string;
-   FileInfo : TSearchRec;
-   slugs    : array of string = ();
-   i        : integer;
-   stdout   : ansistring;
+Var
+    execdir  :   string;
+    rootdir  :   string;
+    workdir  :   string;
+    FileInfo :   TSearchRec;
+    slugs    :   array Of string =   ();
+    i        :   integer;
+    stdout   :   ansistring;
 
-begin
-   execdir := ExtractFilePath(ParamStr(0));
-   rootdir := ExpandFileName(ConcatPaths([execdir, '..']));
-   workdir := ConcatPaths([rootdir, 'exercises', 'practice']);
-   SetCurrentDir(workdir);
+Begin
+    execdir := ExtractFilePath(ParamStr(0));
+    rootdir := ExpandFileName(ConcatPaths([execdir, '..']));
+    workdir := ConcatPaths([rootdir, 'exercises', 'practice']);
+    SetCurrentDir(workdir);
 
-   If FindFirst ('*', faDirectory, FileInfo) = 0 then
-   begin
-      Repeat
-         With FileInfo do
-         begin
-            If (Attr and faDirectory) = faDirectory then
-               if (Name <> '.') and (Name <> '..') then Insert(Name, slugs, 0);
-         end;
-      Until FindNext(FileInfo) <> 0;
-      FindClose(FileInfo);
-   end;
+    If FindFirst ('*', faDirectory, FileInfo) = 0 Then
+        Begin
+            Repeat
+                With FileInfo Do
+                    Begin
+                        If (Attr And faDirectory) = faDirectory Then
+                            If (Name <> '.') And (Name <> '..') Then
+                                Insert(Name, slugs, 0);
+                    End;
+            Until FindNext(FileInfo) <> 0;
+            FindClose(FileInfo);
+        End;
 
-   for i := Low(slugs) to High(slugs) do
-   begin
-      SetCurrentDir(ConcatPaths([workdir, slugs[i]]));
-      writeln('exercise: ', slugs[i]);
-      if RunCommand('make', ['-k'], stdout) then writeln(stdout);
-   end;
+    For i := Low(slugs) To High(slugs) Do
+        Begin
+            SetCurrentDir(ConcatPaths([workdir, slugs[i]]));
+            writeln('exercise: ', slugs[i]);
+            If RunCommand('make', [''], stdout) Then writeln(stdout);
+        End;
 
-end.
+End.

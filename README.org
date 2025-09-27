@@ -46,14 +46,21 @@ Testing a single exercise can be done by invoking the `make` within the respecti
 : #      got: 'Goodbye, Mars!'
 :
 
-To test all available exercises, we can run ~./bin/verify-exercises~, example:
+To test all available exercises, we can run ~make test-all~ within the ~./bin/~ directory, example:
 
 #+begin_src sh :prologue "exec 2>&1" :results verbatim :exports both
-  ./bin/verify-exercises
+  cd ./bin
+  make test-all
 #+end_src
 
 #+RESULTS:
 #+begin_example
+Free Pascal Compiler version 3.2.2 [2021/05/16] for x86_64
+Copyright (c) 1993-2021 by Florian Klaempfl and others
+Target OS: Linux for x86-64
+Compiling verify-exercises.pas
+Linking verify-exercises
+42 lines compiled, 0.5 sec
 exercise: two-fer
 1..3
 ok 1 - no name given
@@ -77,3 +84,5 @@ exercise: hello-world
 not ok 1
 
 #+end_example
+
+*This initial demo version is still too limited to test all exercises.
